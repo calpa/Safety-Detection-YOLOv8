@@ -1,6 +1,16 @@
 # Safety Detection YOLOv8 (Streamlit Demo)
 
+![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+![Streamlit](https://img.shields.io/badge/streamlit-app-red)
+![YOLOv8](https://img.shields.io/badge/ultralytics-yolov8-black)
+![Docker](https://img.shields.io/badge/docker-ready-blue)
+![License: MIT](https://img.shields.io/badge/license-MIT-green)
+
 Interactive PPE/safety detection demo built on **Ultralytics YOLOv8** with a **Streamlit UI**.
+
+This Streamlit version is adapted from the original project:
+
+- https://github.com/biswadeep-roy/Safety-Detection-YOLOv8
 
 The app is designed for demos and debugging:
 
@@ -12,6 +22,17 @@ The app is designed for demos and debugging:
 ## Demo UI
 
 ![Safety Detection YOLOv8](demo.png)
+
+## Overview
+
+This project uses YOLOv8 to detect safety/PPE-related objects (hardhats, masks, safety vests, etc.) and highlight non-compliance.
+
+## Features
+
+- Interactive Streamlit UI for fast demos and debugging
+- Class filtering (choose which labels to draw/return)
+- Red-flag dashboard for non-compliance classes (e.g. `NO-Hardhat`, `NO-Mask`, `NO-Safety Vest`)
+- On-disk caching so you don’t re-run inference on every UI change
 
 ## Requirements
 
@@ -108,3 +129,8 @@ docker run --rm -p 8501:8501 \
 ## License
 
 MIT License. See [LICENSE](LICENSE).
+
+## Acknowledgments
+
+- Original repository and baseline implementation: Biswadeep Roy
+- Ultralytics YOLO
