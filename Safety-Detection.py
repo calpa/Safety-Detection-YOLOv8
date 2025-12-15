@@ -2,6 +2,8 @@ from ultralytics import YOLO
 import cv2
 import cvzone
 import math
+import json
+import os
 
 # Open video file for reading
 cap = cv2.VideoCapture("./videos/test.mp4") 
@@ -16,13 +18,29 @@ classNames = ['Hardhat', 'Mask', 'NO-Hardhat', 'NO-Mask', 'NO-Safety Vest', 'Per
 # Default color for drawing bounding boxes
 myColor = (0, 0, 255)
 
+output_dir = os.path.join(os.getcwd(), "outputs")
+images_dir = os.path.join(output_dir, "images")
+json_dir = os.path.join(output_dir, "json")
+os.makedirs(images_dir, exist_ok=True)
+os.makedirs(json_dir, exist_ok=True)
+
+frame_idx = 0
+
 # Main loop to process each frame of the video
 while True:
     # Read a frame from the video
     success, img = cap.read()
 
+    if not success or img is None:
+        break
+
+    frame_idx += 1
+    frame_timestamp_ms = float(cap.get(cv2.CAP_PROP_POS_MSEC))
+
     # Perform object detection using YOLO on the current frame
     results = model(img, stream=True)
+
+    frame_detections = []
 
     # Process the results of object detection
     for r in results:
@@ -37,6 +55,14 @@ while True:
             conf = math.ceil((box.conf[0] * 100)) / 100
             cls = int(box.cls[0])
             currentClass = classNames[cls]
+
+            frame_detections.append({
+                "class_id": cls,
+                "class_name": currentClass,
+                "confidence": float(conf),
+                "bbox_xyxy": [int(x1), int(y1), int(x2), int(y2)],
+                "bbox_xywh": [int(x1), int(y1), int(w), int(h)],
+            })
 
             # Set color based on the class of the detected object
             if conf > 0.5:
@@ -54,6 +80,24 @@ while True:
                 
                 # Draw bounding box around the detected object
                 cv2.rectangle(img, (x1, y1), (x2, y2), myColor, 3)
+
+    frame_basename = f"frame_{frame_idx:06d}"
+    image_path = os.path.join(images_dir, f"{frame_basename}.jpg")
+    json_path = os.path.join(json_dir, f"{frame_basename}.json")
+
+    cv2.imwrite(image_path, img)
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(
+            {
+                "frame_index": frame_idx,
+                "timestamp_ms": frame_timestamp_ms,
+                "image_file": os.path.relpath(image_path, output_dir),
+                "detections": frame_detections,
+            },
+            f,
+            ensure_ascii=False,
+            indent=2,
+        )
 
     # Display the annotated image
     cv2.imshow("Image", img)
