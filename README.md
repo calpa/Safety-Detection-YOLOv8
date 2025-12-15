@@ -1,7 +1,6 @@
 # Safety Detection with YOLOv8
 
-![Safety Detection YOLOv8] ![image](https://github.com/biswadeep-roy/Safety-Detection-YOLOv8/assets/74821633/e08d378f-9260-450b-8942-845651853d7d)
-
+![Safety Detection YOLOv8](https://github.com/biswadeep-roy/Safety-Detection-YOLOv8/assets/74821633/e08d378f-9260-450b-8942-845651853d7d)
 
 ## Overview
 
@@ -23,7 +22,7 @@ Welcome to the Safety Detection YOLOv8 project! This initiative leverages YOLOv8
 
 ## Introduction
 
-Safety Detection YOLOv8 is an advanced computer vision project designed for real-time object detection. By employing YOLOv8, the model identifies various safety-related objects such as hardhats, masks, safety vests, and more..
+Safety Detection YOLOv8 is an advanced computer vision project designed for real-time object detection. By employing YOLOv8, the model identifies various safety-related objects such as hardhats, masks, safety vests, and more.
 
 ## Features
 
@@ -44,30 +43,30 @@ Ensure you have the following installed on your system:
 
 1. Clone the repository:
 
-    ```bash
-    git clone https://github.com/biswadeep-roy/Safety-Detection-YOLOv8.git
-    ```
+   ```bash
+   git clone https://github.com/biswadeep-roy/Safety-Detection-YOLOv8.git
+   ```
 
 2. Install dependencies:
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 3. Download the pre-trained model file (`ppe.pt`) from the following link:
 
-    [Download ppe.pt](https://drive.google.com/drive/folders/11tfTBkp4JdlJ8QXoAMZxgVMf8xpLBXi_?usp=sharing)
+   [Download ppe.pt](https://drive.google.com/drive/folders/11tfTBkp4JdlJ8QXoAMZxgVMf8xpLBXi_?usp=sharing)
 
 4. Place the downloaded `ppe.pt` file in the project's root directory.
-   
+
 ## Usage
 
 1. Confirm that your webcam or video source is accessible.
 2. Run the main script:
 
-    ```bash
-    python safety_detection.py
-    ```
+   ```bash
+   python Safety-Detection.py
+   ```
 
 3. Observe real-time safety detection results on the displayed video stream.
 
@@ -81,9 +80,7 @@ To tailor the project to specific use cases or add new objects for detection, fo
 
 ## Results
 
-![Demo Image](![image] ![image](https://github.com/biswadeep-roy/Safety-Detection-YOLOv8/assets/74821633/88d9b1a6-8dd8-4662-a2d9-2bfa0275c4fc)
-)
-
+![Demo Image](https://github.com/biswadeep-roy/Safety-Detection-YOLOv8/assets/74821633/88d9b1a6-8dd8-4662-a2d9-2bfa0275c4fc)
 
 _(Include images or GIFs showcasing the model's performance and compliance detection.)_
 
@@ -99,4 +96,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Special thanks to the contributors of the Ultralytics YOLOv5 repository.
 - Inspired by the necessity for improved safety measures in various environments.
-
