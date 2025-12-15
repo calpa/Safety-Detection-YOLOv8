@@ -64,6 +64,42 @@ meta.json                 # settings + video metadata
 
 The cache key includes the model path, thresholds, selected classes, and sampling parameters.
 
+## Docker
+
+Build the image:
+
+```bash
+docker build -t safety-detection-yolov8 .
+```
+
+Run the app:
+
+```bash
+docker run --rm -p 8501:8501 safety-detection-yolov8
+```
+
+### Providing the model weights (`ppe.pt`)
+
+By default, the container expects `ppe.pt` to be available in the working directory (`/app/ppe.pt`).
+
+If you keep `ppe.pt` on your host machine (recommended), mount it into the container:
+
+```bash
+docker run --rm -p 8501:8501 \
+  -v "$PWD/ppe.pt:/app/ppe.pt" \
+  safety-detection-yolov8
+```
+
+### Mount videos and persist outputs (optional)
+
+```bash
+docker run --rm -p 8501:8501 \
+  -v "$PWD/ppe.pt:/app/ppe.pt" \
+  -v "$PWD/videos:/app/videos" \
+  -v "$PWD/outputs:/app/outputs" \
+  safety-detection-yolov8
+```
+
 ## Notes
 
 - If you change thresholds/classes/sampling, you’ll generate a new cache entry.

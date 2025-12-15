@@ -122,6 +122,16 @@ def main():
     st.set_page_config(page_title="Safety Detection YOLOv8", layout="wide")
     st.title("Safety Detection YOLOv8 (Streamlit Demo)")
 
+    st.markdown(
+        """
+        <style>
+        .block-container { max-width: 95rem; }
+        div[data-testid="stDataFrame"] { width: 100% !important; }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
     with st.sidebar:
         st.header("Settings")
         weights_path = st.text_input("Weights path", value="ppe.pt")
@@ -319,7 +329,10 @@ def main():
         m3.metric("NO-Hardhat total", str(total_no_hardhat))
         m4.metric("NO-Mask / NO-Vest", f"{total_no_mask} / {total_no_vest}")
 
-        st.dataframe(rows)
+        try:
+            st.dataframe(rows, height=520, use_container_width=True)
+        except TypeError:
+            st.dataframe(rows, height=520)
 
         if len(rows) > 0:
             frame_choices = sorted([int(r["frame"]) for r in rows])
